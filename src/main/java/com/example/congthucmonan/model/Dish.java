@@ -20,13 +20,15 @@ public class Dish {
     private long dishID;
     @Column(name = "DishName", length = 255, nullable = false)
     private String dishName;
-    @Column(name = "Category", length = 25, nullable = true)
     @Enumerated(EnumType.STRING)
+    @Column(length = 20)
     private ECategory category;// mon chinh, mon phu, mon trang mieng
-    @Column(name = "Cusine", length = 25, nullable = true)
+    @Column(name = "Cusine", length = 255, nullable = true)
     private String cusine;// am thuc Viet, trung quoc, y
+
     @OneToMany(mappedBy = "dish", cascade = CascadeType.ALL)
-    private Set<Dish> dishs;
+    private Set<Recipe> recipes;
+
     @ManyToMany(fetch = FetchType.LAZY, cascade = {
             CascadeType.PERSIST,
             CascadeType.MERGE
@@ -35,4 +37,8 @@ public class Dish {
             joinColumns = { @JoinColumn(name = "DishID") },
             inverseJoinColumns = { @JoinColumn(name = "IngredientID") })
     private Set< Ingredient > ingredients = new HashSet<>();
+
+    public Set<Recipe> getRecipes() {
+        return recipes;
+    }
 }

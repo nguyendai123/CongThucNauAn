@@ -1,9 +1,9 @@
 package com.example.congthucmonan.model;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -37,6 +37,5 @@ public class Ingredient {
             CascadeType.PERSIST,
             CascadeType.MERGE
     },mappedBy = "ingredients")
-    @JsonIgnore
     private Set<Dish> dishs = new HashSet<>();
 }

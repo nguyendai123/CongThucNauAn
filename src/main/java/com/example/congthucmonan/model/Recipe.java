@@ -21,23 +21,26 @@ public class Recipe {
     @Column(name = "RecipesName", length = 255, nullable = false)
     private String recipesName;
     @Column (name = "PreparationTimeMinutes")
-    private int preparationTimeMinutes;//tg chuan bi
+    private Integer preparationTimeMinutes;//tg chuan bi
     @Column(name = "Equip", length = 255, nullable = false)
     private String equip;//chuan bi truoc khi nau mon an
     @Column(name = "Step", length = 255, nullable = true)
     private String step;// cac buoc nau
     @Column(name = "Image")
     private String image;//anh mon an theo cong thuc
-    @Column(name = "Describe")
-    private String describe;//mo ta cong thuc
+    @Column(name = "RecipeDescription",length = 255, nullable = true)
+    private String recipeDescription;//mo ta cong thuc
     @Column (name = "CookingTimeMinutes")
-    private int cookingTimeMinutes;// tg nau
+    private Integer cookingTimeMinutes;// tg nau
     @Enumerated(EnumType.STRING)
-    @Column
+    @Column(name = "Difficulty", length = 20)
+
     private EDifficulty difficulty;
+
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "dishID")
     private Dish dish;
+
     @ManyToMany(fetch = FetchType.LAZY, cascade = {
             CascadeType.PERSIST,
             CascadeType.MERGE
@@ -46,4 +49,9 @@ public class Recipe {
             joinColumns = { @JoinColumn(name = "RecipesID") },
             inverseJoinColumns = { @JoinColumn(name = "IngredientID") })
     private Set< Ingredient > ingredients = new HashSet<>();
+
+    public void addDish(Dish dish) {
+        this.dish = dish;
+        dish.getRecipes().add(this);
+    }
 }
