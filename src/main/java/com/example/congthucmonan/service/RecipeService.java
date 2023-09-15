@@ -1,7 +1,10 @@
 package com.example.congthucmonan.service;
 
+import com.example.congthucmonan.model.Dish;
 import com.example.congthucmonan.model.Recipe;
 import com.example.congthucmonan.repository.RecipeRepository;
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -10,16 +13,15 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-
+@AllArgsConstructor
+@NoArgsConstructor
 @Service
 public class RecipeService {
-
-    private final RecipeRepository recipeRepository;
-
     @Autowired
-    public RecipeService(RecipeRepository recipeRepository) {
-        this.recipeRepository = recipeRepository;
-    }
+    private  RecipeRepository recipeRepository;
+
+
+
 
     public List<Recipe> getAllRecipes() {
         return recipeRepository.findAll();
@@ -41,7 +43,7 @@ public class RecipeService {
         return recipeRepository.findAllByDifficulty(difficulty);
     }
 
-    public List<Recipe> getRecipesByDish(String dish) {
+    public List<Recipe> getRecipesByDish(Dish dish) {
         return recipeRepository.findAllByDish(dish);
     }
 

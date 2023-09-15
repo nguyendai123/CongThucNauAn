@@ -1,5 +1,6 @@
 package com.example.congthucmonan.repository;
 
+import com.example.congthucmonan.model.Dish;
 import com.example.congthucmonan.model.Recipe;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
@@ -18,9 +19,11 @@ public interface RecipeRepository extends JpaRepository<Recipe, Long> {
 
     List<Recipe> findAllByDifficulty(String difficulty);
 
-    List<Recipe> findAllByDish(String dish);
+    List<Recipe> findAllByDish(Dish dish);
 
     List<Recipe> findByIngredientsIn(List<String> ingredients);
 
     List<Recipe> findAllByPreparationTimeMinutesAndCookingTimeMinutes(int preparationTimeMinutes, int cookingTimeMinutes);
+
+
 }

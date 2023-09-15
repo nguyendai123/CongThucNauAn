@@ -2,19 +2,23 @@ package com.example.congthucmonan.service;
 
 import com.example.congthucmonan.model.Ingredient;
 import com.example.congthucmonan.repository.IngredientRepository;
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Optional;
-
+@AllArgsConstructor
+@NoArgsConstructor
 @Service
 public class IngredientService {
-    private final IngredientRepository ingredientRepository;
-
     @Autowired
-    public IngredientService(IngredientRepository ingredientRepository) {
-        this.ingredientRepository = ingredientRepository;
-    }
+    private  IngredientRepository ingredientRepository;
+
+
+
     public List<Ingredient> getAllIngredients() {
         return ingredientRepository.findAll();
     }
@@ -24,10 +28,10 @@ public class IngredientService {
     }
 
     public Optional<Ingredient> getIngredientByName(String ingredientName) {
-        return ingredientRepository.findByName(ingredientName);
+        return ingredientRepository.findByIngredientName(ingredientName);
     }
 
-    public List<Ingredient> getIngredientsByPriceRange(double minPrice, double maxPrice) {
+    public List<Ingredient> getIngredientsByPriceRange(BigDecimal minPrice, BigDecimal maxPrice) {
         return ingredientRepository.findByPriceBetween(minPrice, maxPrice);
     }
 

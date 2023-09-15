@@ -17,7 +17,7 @@ public class Recipe {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "RecipesID", nullable = false)
-    private long recipesID;
+    private Long recipesID;
     @Column(name = "RecipesName", length = 255, nullable = false)
     private String recipesName;
     @Column (name = "PreparationTimeMinutes")
@@ -32,6 +32,7 @@ public class Recipe {
     private String recipeDescription;//mo ta cong thuc
     @Column (name = "CookingTimeMinutes")
     private Integer cookingTimeMinutes;// tg nau
+
     @Enumerated(EnumType.STRING)
     @Column(name = "Difficulty", length = 20)
 

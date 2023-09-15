@@ -11,12 +11,9 @@ import java.util.List;
 public interface DishRepository extends JpaRepository<Dish, Long> {
     List<Dish> findByDishName(String name);
 
-    List<Dish> findByCategory(String categories);
+    List<Dish> findByCategory(String category);
 
 
-
-    List<Dish> findByIngredients(String ingredient);
-    List<Dish> findByIngredientsIn(List<Ingredient> ingredients);
 
 
 }

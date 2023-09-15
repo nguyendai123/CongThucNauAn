@@ -1,7 +1,9 @@
 package com.example.congthucmonan.controller;
 
+import com.example.congthucmonan.model.Dish;
 import com.example.congthucmonan.model.Recipe;
 import com.example.congthucmonan.service.RecipeService;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -14,15 +16,13 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
+@AllArgsConstructor
 @RequestMapping("/api/recipes")
 public class RecipeController {
-
+    @Autowired
     private final RecipeService recipeService;
 
-    @Autowired
-    public RecipeController(RecipeService recipeService) {
-        this.recipeService = recipeService;
-    }
+
 
 
     @GetMapping
@@ -64,7 +64,7 @@ public class RecipeController {
     }
 
     @GetMapping("/dish/{dish}")
-    public ResponseEntity<List<Recipe>> getRecipesByDish(@PathVariable("dish") String dish) {
+    public ResponseEntity<List<Recipe>> getRecipesByDish(@RequestBody Dish dish) {
         List<Recipe> recipes = recipeService.getRecipesByDish(dish);
         if (!recipes.isEmpty()) {
             return ResponseEntity.ok(recipes);

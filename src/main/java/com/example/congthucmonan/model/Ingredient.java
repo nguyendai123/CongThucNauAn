@@ -5,6 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.math.BigDecimal;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -17,11 +18,11 @@ public class Ingredient {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "IngredientID", nullable = false)
-    private long ingredientID;
+    private Long ingredientID;
     @Column(name = "IngredientName", length = 255, nullable = false)
     private String ingredientName;
     @Column(name = "Price", length = 25, nullable = false)
-    private String price;
+    private BigDecimal price;
     @Column(name = "Source", length = 25, nullable = true)
     private String source;// nguon goc nguyen lieu
     @Column(name = "Unit", length = 25, nullable = false)

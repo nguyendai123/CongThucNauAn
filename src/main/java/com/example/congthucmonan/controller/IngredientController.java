@@ -2,24 +2,26 @@ package com.example.congthucmonan.controller;
 
 import com.example.congthucmonan.model.Ingredient;
 import com.example.congthucmonan.service.IngredientService;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Optional;
 @RestController
+@AllArgsConstructor
 @RequestMapping("/api/ingredients")
 public class IngredientController {
-
+    @Autowired
     private final IngredientService ingredientService;
 
-    @Autowired
-    public IngredientController(IngredientService ingredientService) {
-        this.ingredientService = ingredientService;
-    }
+
+
     @GetMapping
     public ResponseEntity<List<Ingredient>> getAllIngredients() {
         List<Ingredient> ingredients = ingredientService.getAllIngredients();
@@ -39,15 +41,11 @@ public class IngredientController {
     }
 
     @GetMapping("/price")
-    public ResponseEntity<List<Ingredient>> getIngredientsByPriceRange(
-            @RequestParam("min") double minPrice,
-            @RequestParam("max") double maxPrice) {
-        List<Ingredient> ingredients = ingredientService.getIngredientsByPriceRange(minPrice, maxPrice);
-        if (!ingredients.isEmpty()) {
-            return ResponseEntity.ok(ingredients);
-        } else {
-            return ResponseEntity.notFound().build();
-        }
+    public List<Ingredient> getIngredientsByPriceRange(
+            @RequestParam("minPrice") BigDecimal minPrice,
+            @RequestParam("maxPrice") BigDecimal maxPrice) {
+        return ingredientService.getIngredientsByPriceRange(minPrice, maxPrice);
+
     }
 
     @GetMapping("/source/{source}")
